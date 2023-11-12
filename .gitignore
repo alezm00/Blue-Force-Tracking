@@ -1,7 +1,7 @@
 SignKey/
 AZMBFT.biprivatekey
 AZMBFT.txt
-
+*.pbo
 
 Releases/
 __pycache__
