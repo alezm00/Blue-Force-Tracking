@@ -1,0 +1,12 @@
+name = "AZM BFT";
+picture = "bft.paa";
+actionName = "Website";
+action = "https://github.com/alezm00";
+description = "";
+logo = "bft.paa";
+logoOver = "bft.paa";
+tooltip = "AZM BFT";
+tooltipOwned = "";
+overview = "Simple Blue Force Tracking";
+author = "Alezm";
+overviewPicture = "bft.paa";
