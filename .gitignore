@@ -2,6 +2,11 @@ SignKey/
 AZMBFT.biprivatekey
 AZMBFT.txt
 
+
+Releases/
+__pycache__
+config.py
+
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,intellij+all,windows,linux,macos,notepadpp
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,intellij+all,windows,linux,macos,notepadpp
 
