@@ -73,8 +73,9 @@ AZMBFT_stopTransmitting = {
     publicVariable "AZMBFT_storage";
 
     [] spawn {
-        sleep AZMBFT_updateInterval+(AZMBFT_updateInterval/2);
+        sleep AZMBFT_updateInterval*2;
         AZMBFT_storage deleteAt (getPlayerUID player);
+        publicVariable "AZMBFT_storage";
     };
 
     [["AZM BFT", 2, [0.161,0.502,0.725,1]], ["TX stopped"]] call CBA_fnc_notify;

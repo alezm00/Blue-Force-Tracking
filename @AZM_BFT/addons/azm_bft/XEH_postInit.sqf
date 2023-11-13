@@ -67,23 +67,25 @@ AZMBFT_getStorage = {
 
 
 
-[] spawn {
-    // ('azm_bft_rx' in items _player) || ('azm_bft_tx' in items _player)
-    while {true} do {
+if (hasInterface) then {
+    [] spawn {
+        // ('azm_bft_rx' in items _player) || ('azm_bft_tx' in items _player)
+        while {true} do {
 
-        if (!('azm_bft_rx' in items player) && AZMBFT_isReceiving) then {
-            [] call AZMBFT_stopReceiving;
+            if (!('azm_bft_rx' in items player) && AZMBFT_isReceiving) then {
+                [] call AZMBFT_stopReceiving;
 
-            // ["no item killing","RX"] call CBA_fnc_debug;
+                // ["no item killing","RX"] call CBA_fnc_debug;
 
+            };
+            if (!('azm_bft_tx' in items player) && AZMBFT_isTransmitting) then {
+                [] call AZMBFT_stopTransmitting;
+                // ["no item killing","TX"] call CBA_fnc_debug;
+            };
+
+
+
+            sleep AZMBFT_updateInterval;
         };
-        if (!('azm_bft_tx' in items player) && AZMBFT_isTransmitting) then {
-            [] call AZMBFT_stopTransmitting;
-            // ["no item killing","TX"] call CBA_fnc_debug;
-        };
-
-
-
-        sleep AZMBFT_updateInterval;
     };
-}
+};
