@@ -51,8 +51,8 @@ class AZMBFT_ui_TXstarter {
 
             tooltip = "Sets the transmission name";
 
-			onload = "(_this select 0) ctrlSetText (uiNamespace getvariable ['ui_radio_nameEdit_tempValue',str group player])";
-            onEditChanged = "uiNamespace setvariable ['ui_radio_nameEdit_tempValue',(_this select 1)]";
+			onload = "(_this select 0) ctrlSetText (uiNamespace getvariable ['AZMBFT_ui_TXstarternameEdit_tempValue',str group player])";
+            onEditChanged = "uiNamespace setvariable ['AZMBFT_ui_TXstarter_nameEdit_tempValue',(_this select 1)]";
 		};
 
 		class start: RscButton {
