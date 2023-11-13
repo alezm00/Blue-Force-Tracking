@@ -88,4 +88,24 @@ if (hasInterface) then {
             sleep AZMBFT_updateInterval;
         };
     };
+} else {
+
+
+    addMissionEventHandler ["HandleDisconnect", {
+        params ["_unit", "_id", "_uid", "_name"];
+
+        private _value = AZMBFT_storage getOrDefault [_uid,false];
+        if (_value isEqualType []) then {
+
+            AZMBFT_storage set [_uid,false];
+            publicVariable "AZMBFT_storage";
+            [_uid] spawn {
+                params ["_uid"];
+                sleep AZMBFT_updateInterval*2;
+                AZMBFT_storage deleteAt (_uid);
+                publicVariable "AZMBFT_storage";
+            };
+        };
+
+    }];
 };
