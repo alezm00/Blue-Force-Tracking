@@ -21,3 +21,4 @@ class CfgPatches {
 #include "defines.hpp"
 #include "ui\common.hpp"
 #include "ui\tx.hpp"
+#include "ui\rx.hpp"

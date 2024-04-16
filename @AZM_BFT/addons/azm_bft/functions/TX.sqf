@@ -32,6 +32,21 @@ AZMBFT_UI_transmittingOpen = {
 };
 
 
+//\d{3}([.]\d{1})?
+AZMBFT_ui_validateCode = {
+    params ["_control"];
+    private _code = parseNumber ( ((ctrlText _control) splitString ",.") joinString "." );
+
+    if !((str(_code) regexMatch "\d{3}([.]\d{1})?") && _code >= 430 && _code < 491) exitWith {
+        [["AZM BFT", 2, [0.906,0.298,0.235,1]], ["invalid code, Must be between 430 and 490"],true] call CBA_fnc_notify;
+        false;
+    };
+    true;
+};
+
+
+
+
 AZMBFT_startTransmitting = {
     disableSerialization;
     private _display = findDisplay 53152;
@@ -42,27 +57,34 @@ AZMBFT_startTransmitting = {
     private _color = _colorList lbData (lbCurSel _colorList);
 
     private _text = ctrlText (_display displayCtrl 1400);
+    private _code = parseNumber ( ((ctrlText (_display displayCtrl 1401)) splitString ",.") joinString "." );
+
+    if !([(_display displayCtrl 1401)] call AZMBFT_ui_validateCode) exitWith {
+        [["AZM BFT", 2, [0.906,0.298,0.235,1]], ["invalid code, Must be between 430 and 490"],true] call CBA_fnc_notify;
+    };
 
     closeDialog 0;
 	AZMBFT_isTransmitting = true;
-    [["AZM BFT", 2, [0.161,0.502,0.725,1]], ["TX started"]] call CBA_fnc_notify;
-	while {AZMBFT_isTransmitting} do {
 
-		private _temp = [
-			player,
-			getPos player,
-			group player,
+
+    [["AZM BFT", 2, [0.161,0.502,0.725,1]], ["TX started"],[format["Code: %1",_code]]] call CBA_fnc_notify;
+    while {AZMBFT_isTransmitting} do {
+
+        private _temp = [
+            player,
+            getPos player,
+            group player,
             _text,
+            _code,
             [_markerType,_color]
-		];
+        ];
 
         AZMBFT_storage set [getPlayerUID player, _temp];
         publicVariable "AZMBFT_storage";
 
 
-		sleep AZMBFT_updateInterval;
-	};
-
+        sleep AZMBFT_updateInterval;
+    };
 };
 
 

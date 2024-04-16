@@ -1,3 +1,6 @@
+
+#include "\a3\3DEN\UI\macros.inc"
+
 #define AZM_VERDE { 0.22, 0.7, 0.2, 0.9 }
 #define AZM_VERDE_DARK { 0.157, 0.4, 0.157, 0.9 }
 #define AZM_ROSSO { 1, 0.22, 0.22, 0.9 }t
