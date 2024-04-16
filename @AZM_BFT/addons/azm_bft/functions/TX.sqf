@@ -37,8 +37,8 @@ AZMBFT_ui_validateCode = {
     params ["_control"];
     private _code = parseNumber ( ((ctrlText _control) splitString ",.") joinString "." );
 
-    if !((str(_code) regexMatch "\d{3}([.]\d{1})?") && _code >= 430 && _code < 491) exitWith {
-        [["AZM BFT", 2, [0.906,0.298,0.235,1]], ["invalid code, Must be between 430 and 490"],true] call CBA_fnc_notify;
+    if !((str(_code) regexMatch "\d{3}([.]\d{1})?") && _code >= AZMBFT_MinCodeRange && _code < (AZMBFT_MaxCodeRange+1)) exitWith {
+        [["AZM BFT", 2, [0.906,0.298,0.235,1]], [format["invalid code, Must be between %1 and %2",AZMBFT_MinCodeRange,AZMBFT_MaxCodeRange]],true] call CBA_fnc_notify;
         false;
     };
     true;
@@ -60,7 +60,7 @@ AZMBFT_startTransmitting = {
     private _code = parseNumber ( ((ctrlText (_display displayCtrl 1401)) splitString ",.") joinString "." );
 
     if !([(_display displayCtrl 1401)] call AZMBFT_ui_validateCode) exitWith {
-        [["AZM BFT", 2, [0.906,0.298,0.235,1]], ["invalid code, Must be between 430 and 490"],true] call CBA_fnc_notify;
+        [["AZM BFT", 2, [0.906,0.298,0.235,1]], [format["invalid code, Must be between %1 and %2",AZMBFT_MinCodeRange,AZMBFT_MaxCodeRange]],true] call CBA_fnc_notify;
     };
 
     closeDialog 0;

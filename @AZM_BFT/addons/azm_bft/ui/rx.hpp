@@ -35,7 +35,7 @@ class AZMBFT_ui_RXstarter {
 
             tooltip = "Sets the receiving Encryption code";
 
-			onload = "(_this select 0) ctrlSetText (uiNamespace getvariable ['AZMBFT_ui_TXstarterEncryptionCodeEdit_tempValue','434'])";
+			onload = "(_this select 0) ctrlSetText (uiNamespace getvariable ['AZMBFT_ui_TXstarterEncryptionCodeEdit_tempValue', str( ((AZMBFT_MinCodeRange+24) min AZMBFT_MaxCodeRange) )])";
             onEditChanged = "uiNamespace setvariable ['AZMBFT_ui_TXstarterEncryptionCodeEdit_tempValue',(_this select 1)];";
             onKillFocus = "_this call AZMBFT_ui_validateCode;";
 		};

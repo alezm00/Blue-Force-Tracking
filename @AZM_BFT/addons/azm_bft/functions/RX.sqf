@@ -15,7 +15,7 @@ AZMBFT_startReceiving = {
     private _code = parseNumber ( ((ctrlText (_display displayCtrl 1400)) splitString ",.") joinString "." );
 
     if !([(_display displayCtrl 1400)] call AZMBFT_ui_validateCode) exitWith {
-        [["AZM BFT", 2, [0.906,0.298,0.235,1]], ["invalid code, Must be between 430 and 490"],true] call CBA_fnc_notify;
+        [["AZM BFT", 2, [0.906,0.298,0.235,1]], [format["invalid code, Must be between %1 and %2",AZMBFT_MinCodeRange,AZMBFT_MaxCodeRange]],true] call CBA_fnc_notify;
     };
 
     closeDialog 0;

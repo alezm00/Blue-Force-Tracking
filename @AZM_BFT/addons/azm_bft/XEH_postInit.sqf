@@ -8,7 +8,8 @@
     {
         // params ["_value"];
         // setViewDistance _value;
-    } // function that will be executed once on mission start and every time the setting is changed.
+    }, // function that will be executed once on mission start and every time the setting is changed.
+    true // Setting will be marked as needing mission restart after being changed.  (optional, default false) <BOOL>
 ] call CBA_fnc_addSetting;
 
 
@@ -22,8 +23,39 @@
     {
         // params ["_value"];
         // setViewDistance _value;
-    } // function that will be executed once on mission start and every time the setting is changed.
+    }, // function that will be executed once on mission start and every time the setting is changed.
+    true // Setting will be marked as needing mission restart after being changed.  (optional, default false) <BOOL>
 ] call CBA_fnc_addSetting;
+
+[
+    "AZMBFT_MinCodeRange", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "EDITBOX", // setting type
+    ["Min code","Lowest number for code range (minimum value 100)"], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "AZM BFT", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    '430',
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        AZMBFT_MinCodeRange = (parseNumber _value) max 100;
+    }, // function that will be executed once on mission start and every time the setting is changed.
+    true // Setting will be marked as needing mission restart after being changed.  (optional, default false) <BOOL>
+] call CBA_fnc_addSetting;
+
+[
+    "AZMBFT_MaxCodeRange", // Internal setting name, should always contain a tag! This will be the global variable which takes the value of the setting.
+    "EDITBOX", // setting type
+    ["Max code","highest number for code range (max value 999)"], // Pretty name shown inside the ingame settings menu. Can be stringtable entry.
+    "AZM BFT", // Pretty name of the category where the setting can be found. Can be stringtable entry.
+    '490',
+    true, // "_isGlobal" flag. Set this to true to always have this setting synchronized between all clients in multiplayer
+    {
+        params ["_value"];
+        AZMBFT_MaxCodeRange = (parseNumber _value) min 999;
+
+    }, // function that will be executed once on mission start and every time the setting is changed.
+    true // Setting will be marked as needing mission restart after being changed.  (optional, default false) <BOOL>
+] call CBA_fnc_addSetting;
+
 
 
 
@@ -34,6 +66,9 @@ AZMBFT_isReceiving = false;
 
 AZMBFT_localMarkerList = createHashMap;
 
+
+// AZMBFT_MinCodeRange = 430;
+// AZMBFT_MaxCodeRange = 490;
 
 AZMBFT_colorsList = [
     ["colorBLUFOR", [0,0.3,0.6,1]],
